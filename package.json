@@ -1,0 +1,10 @@
+{
+  "name": "maos-que-transformam-ep4",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js"
+  }
+}
