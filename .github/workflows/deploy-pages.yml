@@ -40,6 +40,18 @@ jobs:
       - name: Gerar build de produção
         run: npm run build
 
+      - name: Medir redução dos ficheiros
+        run: |
+          HTML_SRC=$(wc -c < html/index.html)
+          HTML_DIST=$(wc -c < dist/index.html)
+          CSS_SRC=$(wc -c < css/style.css)
+          CSS_DIST=$(wc -c < dist/css/style.min.css)
+          JS_SRC=$(find js -maxdepth 1 -name '*.js' -print0 | xargs -0 cat | wc -c)
+          JS_DIST=$(wc -c < dist/js/app.min.js)
+          SVG_SRC=$(wc -c < imagens/logo.svg)
+          SVG_DIST=$(wc -c < dist/imagens/logo.svg)
+          node -e "const vals={HTML:[$HTML_SRC,$HTML_DIST],CSS:[$CSS_SRC,$CSS_DIST],JS:[$JS_SRC,$JS_DIST],SVG:[$SVG_SRC,$SVG_DIST]}; for(const [k,[a,b]] of Object.entries(vals)){console.log('SIZE '+k+' source='+a+' dist='+b+' reduction='+((1-b/a)*100).toFixed(2)+'%')}"
+
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
