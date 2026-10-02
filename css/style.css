@@ -303,3 +303,15 @@ h3 { font-size: 1.25rem; }
   .header-inner { min-height: 68px; }
   .main-nav { top: 68px; }
 }
+
+
+/* Acessibilidade: reduz animações quando solicitado no sistema */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
