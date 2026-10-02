@@ -1,74 +1,92 @@
 # Mãos que Transformam
 
-Single Page Application desenvolvida para a disciplina de Desenvolvimento Front-End, simulando a plataforma digital de uma organização do terceiro setor.
+Aplicação web desenvolvida como projeto acadêmico de **Desenvolvimento Front-End**, simulando a presença digital de uma organização do terceiro setor.
 
-## Funcionalidades
+O projeto foi construído sem frameworks de interface, com foco em **JavaScript moderno, arquitetura modular, experiência responsiva, acessibilidade, persistência local e boas práticas de versionamento**.
 
-- navegação SPA por hash sem recarregamento completo;
-- templates dinâmicos em JavaScript;
+## Visão geral
+
+A aplicação funciona como uma **Single Page Application (SPA)** com roteamento por hash e renderização dinâmica de conteúdo, evitando recarregamentos completos durante a navegação.
+
+Entre os principais fluxos estão a apresentação de projetos sociais, cadastro de voluntários e persistência dos dados no navegador.
+
+## Principais funcionalidades
+
+- navegação SPA por hash;
+- renderização dinâmica por templates JavaScript;
 - cadastro e exclusão de voluntários;
 - persistência com `localStorage`;
 - validação de formulários com feedback visual;
-- menu hambúrguer e dropdown responsivos;
-- modal e toast acessíveis;
-- módulos ES6 com `import` e `export`;
-- suporte a navegação por teclado, foco visível e `aria-current`;
-- respeito a `prefers-reduced-motion`.
+- menu responsivo para dispositivos móveis;
+- dropdown, modal e toast;
+- navegação por teclado;
+- gerenciamento de foco e `aria-current`;
+- suporte a `prefers-reduced-motion`;
+- tratamento seguro de dados inválidos no `localStorage`.
 
-## Tecnologias
+## Tecnologias e ferramentas
 
-O projeto utiliza HTML5, CSS3 e JavaScript moderno (ES6+), com módulos nativos do navegador. Para o fluxo de desenvolvimento são utilizados Git, GitHub e Node.js apenas para scripts locais de build e validação.
+- **HTML5**
+- **CSS3**
+- **JavaScript ES6+**
+- **ES Modules**
+- **Node.js**
+- **Git e GitHub**
+- **Playwright**
+- **axe-core**
+- **esbuild**
+- **Clean CSS**
+- **HTML Minifier Terser**
+- **SVGO**
 
-## Estrutura
+O projeto utiliza JavaScript nativo no navegador. Node.js é usado no fluxo de desenvolvimento para build, minificação e validações automatizadas.
+
+## Estrutura do projeto
 
 ```text
-html/       Estrutura principal da SPA
-css/        Design System, layout e responsividade
+.github/    Configurações relacionadas ao GitHub
+css/        Design system, layout e responsividade
+docs/       Arquivos de documentação
+html/       Estrutura principal da aplicação
 imagens/    Recursos visuais
 js/         Módulos JavaScript
 scripts/    Scripts de build e testes
-README.md   Documentação do projeto
+
+README.md   Documentação principal
 TESTES.md   Roteiro de testes funcionais
+package.json
 ```
 
-### Módulos JavaScript
+### Organização dos módulos JavaScript
 
-- `app.js`: inicialização, eventos globais e integração dos módulos.
-- `router.js`: roteamento e renderização das rotas.
-- `templates.js`: templates e componentes dinâmicos.
-- `storage.js`: leitura e escrita no `localStorage`.
-- `validation.js`: validação e feedback dos formulários.
-- `ui.js`: menu, dropdown, modal, toast e estados de navegação.
-- `data.js`: dados utilizados pelos componentes.
+- `app.js` — inicialização e integração da aplicação;
+- `router.js` — roteamento e renderização das rotas;
+- `templates.js` — templates e componentes dinâmicos;
+- `storage.js` — leitura e escrita no `localStorage`;
+- `validation.js` — validação e feedback dos formulários;
+- `ui.js` — menu, dropdown, modal, toast e estados da interface;
+- `data.js` — dados utilizados pelos componentes.
 
-## Pré-requisitos
+## Executando localmente
 
-- navegador moderno com suporte a ES6 Modules;
-- VS Code ou outro editor;
-- extensão Live Server para execução local;
-- Git para controle de versão;
-- Node.js para executar os comandos de build e testes.
-
-## Instalação
-
-O projeto não possui dependências externas obrigatórias. Após clonar o repositório, não é necessário instalar pacotes adicionais.
+Clone o repositório:
 
 ```bash
 git clone https://github.com/edercandim/maos-que-transformam-ep4.git
 cd maos-que-transformam-ep4
 ```
 
-## Como executar
+Instale as dependências de desenvolvimento:
 
-O projeto utiliza ES6 Modules e deve ser servido por HTTP.
+```bash
+npm install
+```
 
-1. Abra a pasta no VS Code.
-2. Utilize a extensão Live Server.
-3. Abra `html/index.html` com **Open with Live Server**.
+Como o projeto utiliza ES Modules, ele deve ser servido por HTTP. Uma opção simples é abrir `html/index.html` usando a extensão **Live Server** no VS Code.
 
 ## Build
 
-A build prepara uma cópia do projeto na pasta `dist/`.
+O processo de build gera uma versão preparada da aplicação e utiliza ferramentas de otimização para HTML, CSS, JavaScript e recursos SVG.
 
 ```bash
 npm run build
@@ -76,33 +94,82 @@ npm run build
 
 ## Testes
 
-O comando abaixo executa uma verificação automática de sintaxe dos módulos JavaScript.
+Verificação automatizada dos módulos JavaScript:
 
 ```bash
 npm test
 ```
 
-Os testes funcionais manuais também estão documentados no arquivo `TESTES.md`.
+Teste automatizado de acessibilidade:
 
-## Versionamento
+```bash
+npm run test:a11y
+```
 
-O repositório utiliza uma estratégia baseada em GitFlow:
-
-- `main`: versão estável e de lançamento;
-- `develop`: integração do desenvolvimento;
-- `feature/*`: desenvolvimento isolado de funcionalidades;
-- `hotfix/*`: reservado para correções urgentes.
-
-Os commits seguem Conventional Commits, com prefixos como `feat:`, `fix:`, `docs:`, `test:`, `build:` e `refactor:`. As versões estáveis seguem Semantic Versioning no formato `MAJOR.MINOR.PATCH`.
+Também existe um roteiro de testes funcionais manuais documentado em [TESTES.md](./TESTES.md).
 
 ## Acessibilidade
 
-O projeto busca conformidade com WCAG 2.1 nível AA por meio de HTML semântico, labels associados aos campos, foco visível, navegação por teclado, atributos ARIA, feedback de formulários, skip link e redução de movimentos quando configurada pelo utilizador.
+A interface foi desenvolvida considerando práticas alinhadas à **WCAG 2.1**, incluindo:
 
-## Persistência
+- HTML semântico;
+- labels associados aos campos;
+- foco visível;
+- navegação por teclado;
+- atributos ARIA;
+- skip link;
+- feedback de formulários;
+- redução de animações quando `prefers-reduced-motion` está habilitado.
 
-Os voluntários são armazenados localmente usando `localStorage`, com serialização via `JSON.stringify()` e recuperação via `JSON.parse()`.
+O projeto também possui validação automatizada utilizando **Playwright + axe-core**.
 
-## Manutenção
+## Persistência de dados
 
-Novas funcionalidades devem ser criadas em uma branch `feature/*` a partir de `develop`. Após revisão e testes, a feature é integrada à `develop`. Versões estáveis são posteriormente incorporadas à `main`.
+Os voluntários cadastrados são armazenados no navegador por meio de `localStorage`.
+
+A aplicação utiliza serialização com `JSON.stringify()`, leitura com `JSON.parse()` e tratamento de exceções para impedir que dados corrompidos interrompam a execução da interface.
+
+## Qualidade e otimização
+
+O fluxo de desenvolvimento inclui ferramentas para otimização dos arquivos utilizados em produção:
+
+- JavaScript com **esbuild**;
+- CSS com **Clean CSS**;
+- HTML com **HTML Minifier Terser**;
+- SVG com **SVGO**.
+
+Esse processo reduz arquivos desnecessários e prepara uma versão otimizada da aplicação.
+
+## Versionamento
+
+O desenvolvimento segue uma estratégia baseada em GitFlow:
+
+- `main` — versão estável;
+- `develop` — integração do desenvolvimento;
+- `feature/*` — novas funcionalidades;
+- `hotfix/*` — correções urgentes.
+
+Os commits seguem a convenção **Conventional Commits**, com prefixos como:
+
+`feat:`, `fix:`, `docs:`, `test:`, `build:` e `refactor:`.
+
+As versões estáveis seguem **Semantic Versioning (SemVer)**.
+
+## Aprendizados
+
+Este projeto permitiu aplicar conceitos importantes de desenvolvimento front-end sem depender de frameworks, incluindo:
+
+- organização de código em módulos;
+- criação de uma SPA;
+- manipulação do DOM;
+- persistência de estado no navegador;
+- responsividade;
+- acessibilidade;
+- validação de formulários;
+- testes;
+- build e otimização;
+- fluxo profissional com Git e GitHub.
+
+---
+
+**Projeto acadêmico desenvolvido por Eder Henrique Feier Candim.**
