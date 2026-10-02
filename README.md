@@ -67,6 +67,17 @@ package.json
 - `ui.js` — menu, dropdown, modal, toast e estados da interface;
 - `data.js` — dados utilizados pelos componentes.
 
+## Pré-requisitos
+
+Para executar e validar o projeto localmente, recomenda-se:
+
+- navegador moderno com suporte a ES Modules;
+- Git;
+- Node.js 22 ou versão compatível;
+- npm;
+- VS Code ou outro editor;
+- extensão Live Server, ou outro servidor HTTP local.
+
 ## Executando localmente
 
 Clone o repositório:
