@@ -1,5 +1,6 @@
 let toastTimer;
 let lastFocusedElement = null;
+const contrastStorageKey = "maos_que_transformam_alto_contraste";
 
 export function showToast(message) {
   const toast = document.querySelector(".toast");
@@ -19,6 +20,30 @@ export function openModal() {
   modal.hidden = false;
   document.body.style.overflow = "hidden";
   modal.querySelector("[data-close-modal]")?.focus();
+}
+
+export function trapFocusInModal(event) {
+  if (event.key !== "Tab") return;
+
+  const modal = document.querySelector("[data-modal]");
+  if (!modal || modal.hidden) return;
+
+  const focusable = [...modal.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )].filter(element => !element.hasAttribute("hidden"));
+
+  if (!focusable.length) return;
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
 }
 
 export function closeModal() {
@@ -60,6 +85,44 @@ export function toggleDropdown() {
 
   const isOpen = dropdown.classList.toggle("open");
   toggle.setAttribute("aria-expanded", String(isOpen));
+}
+
+export function initAccessibilityPreferences() {
+  const button = document.querySelector(".contrast-toggle");
+  if (!button) return;
+
+  let enabled = false;
+  try {
+    enabled = localStorage.getItem(contrastStorageKey) === "true";
+  } catch {
+    enabled = false;
+  }
+
+  document.body.classList.toggle("high-contrast", enabled);
+  button.setAttribute("aria-pressed", String(enabled));
+  button.setAttribute(
+    "aria-label",
+    enabled ? "Desativar modo de alto contraste" : "Ativar modo de alto contraste"
+  );
+}
+
+export function toggleHighContrast() {
+  const button = document.querySelector(".contrast-toggle");
+  if (!button) return;
+
+  const enabled = !document.body.classList.contains("high-contrast");
+  document.body.classList.toggle("high-contrast", enabled);
+  button.setAttribute("aria-pressed", String(enabled));
+  button.setAttribute(
+    "aria-label",
+    enabled ? "Desativar modo de alto contraste" : "Ativar modo de alto contraste"
+  );
+
+  try {
+    localStorage.setItem(contrastStorageKey, String(enabled));
+  } catch {
+    // A preferência continua válida durante a sessão atual.
+  }
 }
 
 export function setActiveRoute(path) {

@@ -7,7 +7,10 @@ import {
   openModal,
   closeModal,
   toggleMenu,
-  toggleDropdown
+  toggleDropdown,
+  toggleHighContrast,
+  initAccessibilityPreferences,
+  trapFocusInModal
 } from "./ui.js";
 
 function renderVoluntarios() {
@@ -137,6 +140,11 @@ document.addEventListener("click", event => {
     return;
   }
 
+  if (event.target.closest(".contrast-toggle")) {
+    toggleHighContrast();
+    return;
+  }
+
   if (event.target.closest("[data-open-modal]")) {
     openModal();
     return;
@@ -163,6 +171,8 @@ document.addEventListener("click", event => {
 });
 
 document.addEventListener("keydown", event => {
+  trapFocusInModal(event);
+
   if (event.key === "Escape") {
     closeModal();
 
@@ -187,4 +197,5 @@ document.addEventListener("route:rendered", event => {
   }
 });
 
+initAccessibilityPreferences();
 initRouter();
