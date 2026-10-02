@@ -29,7 +29,8 @@ const server = createServer(async (req, res) => {
 await new Promise(resolve => server.listen(4173, "127.0.0.1", resolve));
 
 const browser = await chromium.launch({ headless: true });
-const page = await browser.newPage();
+const context = await browser.newContext();
+const page = await context.newPage();
 
 try {
   await page.goto("http://127.0.0.1:4173/", { waitUntil: "networkidle" });
