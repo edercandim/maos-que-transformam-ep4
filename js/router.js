@@ -8,6 +8,8 @@ import {
 } from "./templates.js";
 import { setActiveRoute, closeMenu } from "./ui.js";
 
+let shouldMoveFocus = false;
+
 const routes = {
   "/inicio": inicioTemplate,
   "/projetos": projetosTemplate,
@@ -34,7 +36,11 @@ export function renderRoute() {
   closeMenu();
 
   window.scrollTo({ top: 0, behavior: "auto" });
-  app.focus({ preventScroll: true });
+
+  if (shouldMoveFocus) {
+    app.focus({ preventScroll: true });
+    shouldMoveFocus = false;
+  }
 
   document.dispatchEvent(new CustomEvent("route:rendered", {
     detail: { path, query }
@@ -42,6 +48,7 @@ export function renderRoute() {
 }
 
 export function navigate(route) {
+  shouldMoveFocus = true;
   const nextHash = `#${route}`;
   if (location.hash === nextHash) {
     renderRoute();
