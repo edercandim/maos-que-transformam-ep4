@@ -165,6 +165,13 @@ document.addEventListener("click", event => {
 document.addEventListener("keydown", event => {
   if (event.key === "Escape") {
     closeModal();
+
+    document.querySelector(".main-nav")?.classList.remove("open");
+    document.querySelector(".menu-toggle")?.classList.remove("open");
+    document.querySelector(".menu-toggle")?.setAttribute("aria-expanded", "false");
+
+    document.querySelector(".nav-dropdown")?.classList.remove("open");
+    document.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
   }
 });
 
