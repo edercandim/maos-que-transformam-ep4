@@ -37,6 +37,12 @@ jobs:
       - name: Executar testes
         run: npm test
 
+      - name: Instalar Chromium para testes de acessibilidade
+        run: npx playwright install --with-deps chromium
+
+      - name: Testar acessibilidade e navegação por teclado
+        run: npm run test:a11y
+
       - name: Gerar build de produção
         run: npm run build
 
