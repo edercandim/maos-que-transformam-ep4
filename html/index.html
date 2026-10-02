@@ -28,10 +28,12 @@
         <a href="#/inicio" data-route="/inicio">Início</a>
 
         <div class="nav-dropdown">
-          <button class="nav-dropdown-toggle" type="button" aria-expanded="false">
+          <button class="nav-dropdown-toggle" type="button"
+            aria-expanded="false"
+            aria-controls="projetos-submenu">
             Projetos <span aria-hidden="true">▾</span>
           </button>
-          <div class="nav-dropdown-menu">
+          <div id="projetos-submenu" class="nav-dropdown-menu">
             <a href="#/projetos" data-route="/projetos">Todos os projetos</a>
             <a href="#/projetos?categoria=educacao" data-route="/projetos?categoria=educacao">Educação</a>
             <a href="#/projetos?categoria=tecnologia" data-route="/projetos?categoria=tecnologia">Tecnologia</a>
@@ -41,6 +43,11 @@
         <a href="#/voluntariado" data-route="/voluntariado">Voluntariado</a>
         <a href="#/sobre" data-route="/sobre">Sobre</a>
         <a href="#/contato" data-route="/contato">Contato</a>
+        <button class="contrast-toggle" type="button"
+          aria-pressed="false"
+          aria-label="Ativar modo de alto contraste">
+          Alto contraste
+        </button>
       </nav>
     </div>
   </header>
@@ -50,7 +57,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>© 2026 Mãos que Transformam.</p>
-      <p>Experiência Prática III — Desenvolvimento Front-End.</p>
+      <p>Experiência Prática IV — Versionamento e acessibilidade.</p>
     </div>
   </footer>
 
